@@ -5,12 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import NavBar from './comp/NavBar';
 import Login from './comp/login';
+import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <><NavBar></NavBar></>
-    <Login></Login>
+    <Router>
+          <NavBar></NavBar>
+
+      <Routes>
+
+<Route path='/'  element={    <Login></Login>
+}></Route>
+    </Routes>
+    </Router>
   </React.StrictMode>
 );
 
