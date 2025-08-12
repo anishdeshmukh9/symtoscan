@@ -1,17 +1,20 @@
-// src/components/Login.js
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig";
+import { Navigate } from "react-router-dom";
 
-// Initialize Firebase
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export default function Login() {
-  const [user, setUser] = useState(null);
 
-  // Track login state
+
+export default function Login() {
+const [user, setUser] = useState(null);
+if (user != null) {
+    Navigate("/Dashboard")
+}
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -19,17 +22,16 @@ export default function Login() {
     return () => unsubscribe(); // Cleanup subscription on unmount
   }, []);
 
-  // Google login function
   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
+
     } catch (error) {
       console.error("Authentication Error:", error);
     }
   };
 
-  // Logout function
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -38,7 +40,10 @@ export default function Login() {
     }
   };
 
-  // --- Styles ---
+  
+
+
+
 
   const pageStyle = {
     display: "flex",
@@ -122,4 +127,7 @@ export default function Login() {
       </div>
     </div>
   );
+
+  
 }
+
