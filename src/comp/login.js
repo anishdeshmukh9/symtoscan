@@ -3,21 +3,26 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signO
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
 
 
+
 export default function Login() {
 const [user, setUser] = useState(null);
-if (user != null) {
-    Navigate("/Dashboard")
-}
+const navigate = useNavigate();
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+  navigate("/dashboard");
+}
     });
     return () => unsubscribe(); // Cleanup subscription on unmount
   }, []);
