@@ -17,7 +17,8 @@ const symptomsList = [
   "shivering",
   "chills",
   "joint pain",
-  "stomach pain",
+  "stomach pain", 
+  
   "acidity",
   "ulcers on tongue",
   "muscle wasting",
