@@ -18,7 +18,7 @@ const symptomsList = [
   "chills",
   "joint pain",
   "stomach pain", 
-  
+
   "acidity",
   "ulcers on tongue",
   "muscle wasting",
