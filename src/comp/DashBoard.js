@@ -54,10 +54,18 @@ export default function DiseasePredictorUI() {
     setSearch("");
   };
 
-  const handlePredict = () => {
-    // ⚡ Backend logic will go here — send `selectedSymptoms` to FastAPI
-    console.log("Selected Symptoms:", selectedSymptoms);
-  };
+const handlePredict = async () => {
+  const res = await fetch("http://127.0.0.1:8000/dashboard", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sym: selectedSymptoms }),
+  });
+  const data = await res.json();
+  console.log("Response:", data);
+};
+
 
   return (
     <Box
