@@ -36,6 +36,9 @@ const symptomsList = [
 export default function DiseasePredictorUI() {
   const [search, setSearch] = useState("");
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [output, setoutput] = useState("");
+  const[score , setscore] = useState(""); 
+
 
   const filteredSymptoms = symptomsList.filter((symptom) =>
     symptom.toLowerCase().includes(search.toLowerCase())
@@ -63,7 +66,9 @@ const handlePredict = async () => {
     body: JSON.stringify({ sym: selectedSymptoms }),
   });
   const data = await res.json();
-  console.log("Response:", data);
+  setoutput(data.predicted_disease);
+  console.log(data.Score)
+
 };
 
 
@@ -138,6 +143,11 @@ const handlePredict = async () => {
           </Box>
         </Paper>
       )}
+
+         <Typography variant="h4" fontWeight="bold" textAlign="center">{output} {score}
+      </Typography>
     </Box>
+
+    
   );
 }
